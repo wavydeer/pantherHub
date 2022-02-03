@@ -21,13 +21,16 @@ export class HomeTabNavigator extends Component {
   constructor(props) {
     super(props);
   }
-  // componentDidMount() {
-  //   this.props.fetchUser();
-  //   console.log("");
-  // }
+  componentDidMount() {
+    this.props.fetchUser();
+    
+  }
   render() {
     const Tab = createBottomTabNavigator();
     const insets = useSafeAreaInsets;
+
+    const {currentUser} = this.props;
+    console.log(currentUser + ' is logged in');
     return (
       <Tab.Navigator
         screenOptions={({ route }) => ({

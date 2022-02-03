@@ -8,8 +8,6 @@ import {
   Button,
 } from "react-native";
 
-import firebase from "firebase/compat";
-
 
 import styles from "./styles";
 import RegisterScreen from "../Register";
@@ -27,13 +25,14 @@ export class LoginScreen extends React.Component {
   
   onSignIn() {
     const { email, password } = this.state;
-    firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((result) => {
-      console.log(result)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+
+    // firebase.auth().signInWithEmailAndPassword(email, password)
+    // .then((result) => {
+    //   console.log(result)
+    // })
+    // .catch((error) => {
+    //   console.log(error)
+    // })
   }
   render() {
     return (

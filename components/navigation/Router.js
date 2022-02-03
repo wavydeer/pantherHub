@@ -17,22 +17,22 @@ import thunk from 'redux-thunk'
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 //Firebase
-import { initializeApp, onAuthStateChanged } from "firebase/app";
-const firebaseConfig = {
-  apiKey: "AIzaSyDVJVXJu_d1mAEEx5mL5s79MQvsty3aV2A",
-  authDomain: "fir-auth-fa4ef.firebaseapp.com",
-  projectId: "fir-auth-fa4ef",
-  storageBucket: "fir-auth-fa4ef.appspot.com",
-  messagingSenderId: "706815803394",
-  appId: "1:706815803394:web:d2e92f110eab03de3e671b",
-};
+// import { initializeApp, onAuthStateChanged } from "firebase/app";
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDVJVXJu_d1mAEEx5mL5s79MQvsty3aV2A",
+//   authDomain: "fir-auth-fa4ef.firebaseapp.com",
+//   projectId: "fir-auth-fa4ef",
+//   storageBucket: "fir-auth-fa4ef.appspot.com",
+//   messagingSenderId: "706815803394",
+//   appId: "1:706815803394:web:d2e92f110eab03de3e671b",
+// };
 
-// Initialize Firebase
-if (firebase.apps.length === 0) {
-  firebase.initializeApp(firebaseConfig);
-}
+// // Initialize Firebase
+// if (firebase.apps.length === 0) {
+//   firebase.initializeApp(firebaseConfig);
+// }
 
-import firebase from "firebase/compat";
+// import firebase from "firebase/compat";
 
 const Stack = createStackNavigator();
 
@@ -41,25 +41,30 @@ export class Router extends React.Component {
     super(props);
 
     this.state = {
-      loaded: false,
+      loaded: true,
     };
   }
 
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (!user) {
-        this.setState({
-          loggedIn: false,
-          loaded: true,
-        });
-      } else {
-        this.setState({
-          loggedIn: true,
-          loaded: true,
-        });
-      }
-    });
-  }
+  // componentDidMount() {
+  //   // firebase.auth().onAuthStateChanged((user) => {
+  //   //   if (!user) {
+  //   //     this.setState({
+  //   //       loggedIn: false,
+  //   //       loaded: true,
+  //   //     });
+  //   //   } else {
+  //   //     this.setState({
+  //   //       loggedIn: true,
+  //   //       loaded: true,
+  //   //     });
+  //   //   }
+  //   // });
+  //   // this.setState({
+  //   //   loggedIn: true,
+  //   //  loaded: true,
+  //   // })
+
+  // }
 
   render() {
     const { loggedIn, loaded } = this.state;

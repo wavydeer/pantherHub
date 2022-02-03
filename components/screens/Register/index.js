@@ -8,7 +8,6 @@ import {
   Button,
 } from "react-native";
 
-import firebase from "firebase/compat";
 
 import styles from "./styles";
 
@@ -27,23 +26,23 @@ export class RegisterScreen extends React.Component {
 
   onSignUp() {
     const { firstName, lastName, email, password } = this.state;
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        //Adding user to collections with other data
-        firebase.firestore().collection('users')
-        .doc(firebase.auth().currentUser.uid)
-        .set({
-          firstName,
-          lastName,
-          email,
-        })
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // firebase
+    //   .auth()
+    //   .createUserWithEmailAndPassword(email, password)
+    //   .then((result) => {
+    //     //Adding user to collections with other data
+    //     firebase.firestore().collection('users')
+    //     .doc(firebase.auth().currentUser.uid)
+    //     .set({
+    //       firstName,
+    //       lastName,
+    //       email,
+    //     })
+    //     console.log(result);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   }
   render() {
     return (
