@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-panther-staging-90255-authRole",
+      "UnauthRoleArn": "arn:aws:iam::566770172851:role/amplify-panther-staging-90255-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::566770172851:role/amplify-panther-staging-90255-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-panther-staging-90255-deployment",
+      "UnauthRoleName": "amplify-panther-staging-90255-unauthRole",
+      "StackName": "amplify-panther-staging-90255",
+      "StackId": "arn:aws:cloudformation:us-east-1:566770172851:stack/amplify-panther-staging-90255/1355d920-84d0-11ec-af0a-12d63f44d7b7",
+      "AmplifyAppId": "d2m2q3nhzx6m0e"
+    },
+    "categories": {
+      "auth": {
+        "panther": {}
+      }
+    }
+  }
+}

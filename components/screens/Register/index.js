@@ -11,40 +11,14 @@ import {
 
 import styles from "./styles";
 
-export class RegisterScreen extends React.Component {
-  constructor(props) {
-    super(props);
+const RegisterScreen = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    this.state = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-    };
-    this.onSignUp = this.onSignUp.bind(this);
-  }
 
-  onSignUp() {
-    const { firstName, lastName, email, password } = this.state;
-    // firebase
-    //   .auth()
-    //   .createUserWithEmailAndPassword(email, password)
-    //   .then((result) => {
-    //     //Adding user to collections with other data
-    //     firebase.firestore().collection('users')
-    //     .doc(firebase.auth().currentUser.uid)
-    //     .set({
-    //       firstName,
-    //       lastName,
-    //       email,
-    //     })
-    //     console.log(result);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-  }
-  render() {
+  const onSignUp= () => {}
     return (
       <View style={styles.background}>
         <SafeAreaView style={styles.container}>
@@ -54,6 +28,7 @@ export class RegisterScreen extends React.Component {
               style={styles.inputText}
               placeholder="First Name"
               placeholderTextColor={"#D6D2C1"}
+              value={name}
               onChangeText={(firstName) => this.setState({ firstName })}
             />
           </View>
@@ -93,5 +68,5 @@ export class RegisterScreen extends React.Component {
       </View>
     );
   }
-}
+
 export default RegisterScreen;

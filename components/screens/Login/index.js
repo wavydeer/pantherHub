@@ -1,40 +1,41 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   Text,
   View,
   TextInput,
   TouchableOpacity,
   SafeAreaView,
-  Button,
+  Button, Alert, Pressable,
 } from "react-native";
+import {useNavigation} from '@react-navigation/native';
+
+
+import homeTabNavigator from "../../navigation/homeTabNavigator";
 
 
 import styles from "./styles";
 import RegisterScreen from "../Register";
+import { Auth } from "aws-amplify";
+import { useDispatch } from "react-redux";
+import { onLogin } from "../../../redux/actions";
 
-export class LoginScreen extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      email: "",
-      password: "",
-    };
-    this.onSignIn = this.onSignIn.bind(this);
-  }
+//Nedd to create loading feature when the user is loging in
+const LoginScreen = () => {
+  const navigation = useNavigation();
+
+  const dispatch = useDispatch();
   
-  onSignIn() {
-    const { email, password } = this.state;
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    // firebase.auth().signInWithEmailAndPassword(email, password)
-    // .then((result) => {
-    //   console.log(result)
-    // })
-    // .catch((error) => {
-    //   console.log(error)
-    // })
+  const handleLogin = (e) => {
+    dispatch(onLogin(username,password))
+    e.preventDefault();
   }
-  render() {
+
     return (
       <View style={styles.background}>
         <SafeAreaView style={styles.container}>
@@ -42,36 +43,43 @@ export class LoginScreen extends React.Component {
           <View style={styles.inputView}>
             <TextInput
               style={styles.inputText}
-              placeholder="Email..."
+              placeholder="Username"
               placeholderTextColor="grey"
-              onChangeText={(email) => this.setState({ email })}
+              value= {username}
+              onChangeText={text => setUsername(text)}
+              
             />
           </View>
           <View style={styles.inputView}>
             <TextInput
               secureTextEntry
               style={styles.inputText}
-              placeholder="Password..."
+              placeholder="Password"
               placeholderTextColor="grey"
-              onChangeText={(password) => this.setState({ password})}
+              value = {password}
+              onChangeText={text => setPassword(text)}
+              
+          
             />
           </View>
           <TouchableOpacity>
             <Text style={styles.pass}>Forgot Password?</Text>
           </TouchableOpacity>
+
           {/* This is the Login button and when you press it it runs the onSignIn method*/}
-          <TouchableOpacity style={styles.loginBtn} onPress={() => this.onSignIn()}>
+          <Pressable style={styles.loginBtn} onPress={handleLogin}>
             <Text style={styles.loginText} >LOGIN</Text>
-          </TouchableOpacity>
+          </Pressable>
+
           <TouchableOpacity>
             <Text style={styles.signup}>
               Not a member?{" "}
-              <Text onPress={() => this.props.navigation.navigate("Register Screen")} style={{ fontSize: 16, color: "#2691d9" }}>Signup</Text>
+              <Text onPress={() => navigation.navigate("Register Screen")} style={{ fontSize: 16, color: "#2691d9" }}>Signup</Text>
             </Text>
           </TouchableOpacity>
         </SafeAreaView>
       </View>
     );
-  }
+  
 }
 export default LoginScreen;

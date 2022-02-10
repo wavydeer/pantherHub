@@ -1,12 +1,21 @@
+import React from "react";
+
 import Router from "./components/navigation/Router";
 
-import React, { Component } from "react";
+import Amplify from "aws-amplify";
+import config from './aws-exports'
+import { Provider } from "react-redux";
+import { store } from "./redux/store/store";
 
-import { Text, View } from "react-native";
+
+
+Amplify.configure(config);
 
 const App = () => {
+         // Provider component makes the Redux store available to any nested components that need to access the Redux store.
  
-    return <Router />;
+    return <Provider store ={store} ><Router /></Provider>
+        
     
 
 }

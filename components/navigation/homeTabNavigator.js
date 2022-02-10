@@ -12,25 +12,15 @@ import PostScreen from "../screens/Post/index";
 import colors from "../../assets/Colors";
 import SearchTabNavigator from "../screens/Search/SearchTabNavigator/SearchTabNavigator";
 
-//Redux
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { fetchUser } from "../../redux/actions/index";
-
 export class HomeTabNavigator extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    this.props.fetchUser();
-    
-  }
+
   render() {
     const Tab = createBottomTabNavigator();
-    const insets = useSafeAreaInsets;
+    // const insets = useSafeAreaInsets; doesnt work on ios
 
-    const {currentUser} = this.props;
-    console.log(currentUser + ' is logged in');
     return (
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -39,7 +29,7 @@ export class HomeTabNavigator extends Component {
           tabBarLabel: () => {
             return null;
           },
-          // tabBarStyle: { height: 50 + insets.bottom },
+        tabBarStyle: { height: 100  /* +insets.bottom*/ },
           tabBarIcon: ({ focused }) => {
             let iconName;
 
@@ -88,10 +78,6 @@ export class HomeTabNavigator extends Component {
   }
 }
 
-// connect function to props to be able to access
-const mapStateToProps = (store) => ({
-  currentUser: store.userState.currentUser,
-});
-const mapDispatchProps = (dispatch) =>
-  bindActionCreators({ fetchUser }, dispatch);
-export default connect(mapStateToProps, mapDispatchProps)(HomeTabNavigator);
+
+export default HomeTabNavigator;
+

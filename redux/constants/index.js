@@ -1,1 +1,2 @@
-export const USER_STATE_CHANGE = 'USER_STATE_CHANGE'
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
