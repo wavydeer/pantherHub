@@ -5,7 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   SafeAreaView,
-  Button, Alert, Pressable,
+  Button, Alert, Pressable, ActivityIndicator,
 } from "react-native";
 import {useNavigation} from '@react-navigation/native';
 
@@ -16,8 +16,9 @@ import homeTabNavigator from "../../navigation/homeTabNavigator";
 import styles from "./styles";
 import RegisterScreen from "../Register";
 import { Auth } from "aws-amplify";
-import { useDispatch } from "react-redux";
-import { onLogin } from "../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { isDataLoading, onLogin, isDataLoaded } from "../../../redux/actions";
+import colors from "../../../assets/Colors";
 
 
 //Nedd to create loading feature when the user is loging in
@@ -29,13 +30,19 @@ const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleLogin = (e) => {
+  const handleLogin = () => {
+    setIsLoading(true)
     dispatch(onLogin(username,password))
-    e.preventDefault();
   }
-
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <ActivityIndicator size="large" color= {colors.primary} />
+      </View>
+    );
+  }
     return (
       <View style={styles.background}>
         <SafeAreaView style={styles.container}>

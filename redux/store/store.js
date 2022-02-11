@@ -5,6 +5,7 @@ import {authReducer} from "../reducers/index"
 const RootReducers = combineReducers({
     // Reducers
     authReducer,
+    
 
 })
 export const store = createStore(

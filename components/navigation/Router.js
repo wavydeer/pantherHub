@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -10,34 +10,33 @@ import { useSelector } from "react-redux";
 import { authReducer } from "../../redux/reducers";
 import { ActivityIndicator, View } from "react-native";
 
-
-
-
-
 const Stack = createStackNavigator();
-
-
-
-
 const HomeStack = () => {
-
-  return(
-  <Stack.Navigator>
-    <Stack.Screen name={"Tab Navigator"} component={HomeTabNavigator} />
-  </Stack.Navigator>
-  )
-}
-
-const AuthStack = () =>{
-  return(
+  return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-
-      {/* <Stack.Screen
+      <Stack.Screen name={"Tab Navigator"} component={HomeTabNavigator} />
+    </Stack.Navigator>
+  );
+};
+const SplashStack = () => {
+  const [splash, setSplash] = useState(true);
+  useEffect(() => {
+    setSplash(false);
+  }, []);
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen
         name={"Landing"}
         component={LandingScreen}
         options={{ headerShown: false }}
-      /> */}
+      />
+    </Stack.Navigator>
+  );
+};
 
+const AuthStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name={"Login Screen"}
         component={LoginScreen}
@@ -47,111 +46,34 @@ const AuthStack = () =>{
         name={"Register Screen"}
         component={RegisterScreen}
         options={{ headerShow: false }}
-            />
+      />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
-const RootNavigation = () =>{
-  const [loading, setLoading] = useState(false)
- const token = useSelector(state => state.authReducer.authToken)
- console.log(token)
- if(loading) {
+const RootNavigation = () => {
+  const [isLoading, setIsLoading] = useState(true)
+  const authCurrentUser = useSelector((state) => state.authReducer.currentUser);
+
+  useEffect(()=>{
+    setIsLoading(false)
+  })
+  if (isLoading) {
+    return (
+      <NavigationContainer>
+        <SplashStack />
+      </NavigationContainer>
+    );
+  }
   return (
-    <View style= {{flex: 1, justifyContent: "center"}}>
-      <ActivityIndicator size = "large" color = "blue"/>
-    </View>
-  )
-}
-  return(
     <NavigationContainer>
-
-      {
-        token === null ? 
-        <AuthStack /> : <HomeStack />
-      }
-      
+      {authCurrentUser === null ? <AuthStack /> : <HomeStack />}
     </NavigationContainer>
-  )
-}
+  );
+};
 
-export const Router = () =>{
-  return(
-    <RootNavigation />
-  )
-  
-}
-
- 
-    // const { loggedIn, loaded } = this.state;
-    // if (!loaded) {
-    //   return (
-    //     <NavigationContainer>
-    //       <Stack.Navigator>
-    //         <Stack.Screen
-    //           name={"Landing"}
-    //           component={LandingScreen}
-    //           options={{ headerShown: false }}
-    //         />
-    //       </Stack.Navigator>
-    //     </NavigationContainer>
-    //   );
-    // }
-    // if (!loggedIn) {
-    //   return (
-    //     <NavigationContainer>
-    //       <Stack.Navigator screenOptions={{ headerShown: false }}>
-    //         <Stack.Screen
-    //           name={"Login Screen"}
-    //           component={LoginScreen}
-    //           options={{ headerShow: false }}
-    //         />
-    //         <Stack.Screen
-    //           name={"Register Screen"}
-    //           component={RegisterScreen}
-    //           options={{ headerShow: false }}
-    //         />
-    //       </Stack.Navigator>
-    //     </NavigationContainer>
-    //   );
-    // }
-    // return (
-    //   <NavigationContainer>
-    //     <Stack.Navigator screenOptions={{ headerShown: false }}>
-    //       <Stack.Screen name={"Tab Navigator"} component={HomeTabNavigator} />
-    //     </Stack.Navigator>
-    //   </NavigationContainer>
-    // );
-
-
-//     return(
-//       <NavigationContainer>
-    
-//         <Stack.Navigator screenOptions={{ headerShown: false }}>
-        
-//                 {/* <Stack.Screen
-//                   name={"Landing"}
-//                   component={LandingScreen}
-//                   options={{ headerShown: false }}
-//                 /> */}
-              
-//         <Stack.Screen
-//                   name={"Login Screen"}
-//                   component={LoginScreen}
-//                   options={{ headerShow: false }}
-//                 />
-//                 <Stack.Screen
-//                   name={"Register Screen"}
-//                   component={RegisterScreen}
-//                   options={{ headerShow: false }}
-//                 />
-//         <Stack.Screen name={"Tab Navigator"} component={HomeTabNavigator} />
-//         </Stack.Navigator>
-//       </NavigationContainer>
-//     )
-//   }
-// }
-
-
+export const Router = () => {
+  return <RootNavigation />;
+};
 
 export default Router;

@@ -2,7 +2,7 @@ import React, { useState, useEffect, Component } from "react";
 import { View, SafeAreaView, StatusBar, TextInput } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import HomeScreen from "../screens/Home";
 import SearchScreen from "../screens/Search/index";
@@ -18,8 +18,9 @@ export class HomeTabNavigator extends Component {
   }
 
   render() {
+    
     const Tab = createBottomTabNavigator();
-    // const insets = useSafeAreaInsets; doesnt work on ios
+    //const insets = useSafeAreaInsets; //doesnt work on ios
 
     return (
       <Tab.Navigator
@@ -29,31 +30,39 @@ export class HomeTabNavigator extends Component {
           tabBarLabel: () => {
             return null;
           },
-        tabBarStyle: { height: 100  /* +insets.bottom*/ },
-          tabBarIcon: ({ focused }) => {
-            let iconName;
+          tabBarStyle: { height: 70 /*+insets.bottom*/ },
+          // tabBarIcon: ({ focused }) => {
+          //   let iconName;
 
-            if (route.name === "Home") {
-              iconName = focused ? "home" : "home-outline";
-            } else if (route.name === "Tools") {
-              iconName = focused ? "aperture" : "aperture-outline";
-            } else if (route.name === "MessageTab") {
-              iconName = focused
-                ? "chatbox-ellipses"
-                : "chatbox-ellipses-outline";
-            } else if (route.name === "Search") {
-              iconName = focused ? "search" : "search-outline";
-            } else if (route.name === "Post") {
-              iconName = focused ? "add" : "add-outline";
-            }
+          //   if (route.name === "Home") {
+          //     iconName = focused ? "home" : "home-outline";
+          //   } else if (route.name === "Tools") {
+          //     iconName = focused ? "aperture" : "aperture-outline";
+          //   } else if (route.name === "MessageTab") {
+          //     iconName = focused
+          //       ? "chatbox-ellipses"
+          //       : "chatbox-ellipses-outline";
+          //   } else if (route.name === "Search") {
+          //     iconName = focused ? "search" : "search-outline";
+          //   } else if (route.name === "Post") {
+          //     iconName = focused ? "add" : "add-outline";
+          //   }
 
-            return (
-              <Ionicons name={iconName} size={28} color={colors.primary} />
-            );
-          },
+          //   return (
+          //     <Ionicons name={iconName} size={28} color={colors.primary} />
+          //   );
+          // },
         })}
       >
-        <Tab.Screen name={"Home"} component={HomeScreen} />
+        <Tab.Screen
+          name={"Home"}
+          component={HomeScreen}
+          options={{
+            tabBarIcon : () => {
+             return <Ionicons android = "md-add" ios = "ios-add" name="add" size = { 100} color={colors.primary}/>
+            }
+          }}
+        />
         <Tab.Screen
           name={"Search"}
           component={SearchTabNavigator}
@@ -78,6 +87,4 @@ export class HomeTabNavigator extends Component {
   }
 }
 
-
 export default HomeTabNavigator;
-
