@@ -10,7 +10,7 @@ import SearchTopTabNavigator from "./TopTabNavigator/TopTabNavigator";
 import SearchBarScreen from "../SearchBarScreen/SearchBarScreen"
 const Stack = createStackNavigator();
 
-//Routes--> homeTabNavigator--> SearchTabNavigator
+//Routes--> BottomTabNavigator--> SearchTabNavigator
 const SearchTabNavigator = ({ navigation }) => {
   const isFocused = useIsFocused();
   const [inputText, setInputText] = useState("");

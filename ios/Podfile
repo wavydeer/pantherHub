@@ -26,6 +26,8 @@ target 'panther' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
   post_install do |installer|
     react_native_post_install(installer)
 

@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import HomeTabNavigator from "../navigation/homeTabNavigator";
+import BottomTabNavigator from "../navigation/bottomTabNavigator";
 import RegisterScreen from "../screens/Register";
 import LoginScreen from "../../components/screens/Login/index";
 import LandingScreen from "../screens/Landing/index";
@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 const HomeStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name={"Tab Navigator"} component={HomeTabNavigator} />
+      <Stack.Screen name={"Tab Navigator"} component={BottomTabNavigator} />
     </Stack.Navigator>
   );
 };
@@ -52,22 +52,26 @@ const AuthStack = () => {
 };
 
 const RootNavigation = () => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const authCurrentUser = useSelector((state) => state.authReducer.currentUser);
 
-  useEffect(()=>{
-    setIsLoading(false)
-  })
+  useEffect(() => {
+    setIsLoading(false);
+  });
+
   if (isLoading) {
-    return (
+    try {
       <NavigationContainer>
         <SplashStack />
-      </NavigationContainer>
-    );
+      </NavigationContainer>;
+    } catch {
+      setIsLoading(false);
+    }
   }
+
   return (
     <NavigationContainer>
-      {authCurrentUser === null ? <AuthStack /> : <HomeStack />}
+      {authCurrentUser == null ? <AuthStack /> : <HomeStack />}
     </NavigationContainer>
   );
 };

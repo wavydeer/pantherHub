@@ -10,7 +10,7 @@ import NotificationScreen from "../NotificationScreen/index";
 
 
 const Stack = createStackNavigator();
-// Router --> homeTabNavigator --> MessageTabNavigator
+// Router --> BottomTabNavigator --> MessageTabNavigator
 // This navigator is to navigate between the icons in the message screen
 
 const MessageTabNavigator = ({ navigation }) => {

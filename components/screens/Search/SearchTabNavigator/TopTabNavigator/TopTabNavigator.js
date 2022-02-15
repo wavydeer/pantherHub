@@ -5,7 +5,7 @@ import NewsScreen from "../../NewsScreen";
 import SearchScreen from "../..";
 import colors from "../../../../../assets/Colors"
 
-// Routes--> homeTabNavigator--> SearchTabNavigator--> TopTabNavigator
+// Routes--> BottomTabNavigator--> SearchTabNavigator--> TopTabNavigator
 const SearchTopTabNavigator = () => {
   const Tab = createMaterialTopTabNavigator();
 

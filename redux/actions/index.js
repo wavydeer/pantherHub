@@ -7,7 +7,7 @@ import * as c from "../constants/index";
 export const onLogin = (username, password) => {
   return async (dispatch) => {
     try {
-      const userObject = await Auth.signIn(username, password);
+      const userObject = await Auth.signIn(username, password).catch((e) => {console.log("ERROR : ", e)});
       
       const authCurrentUser =
         userObject.challengeParam.userAttributes.preferred_username;

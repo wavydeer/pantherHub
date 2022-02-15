@@ -10,7 +10,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 
 
-import homeTabNavigator from "../../navigation/homeTabNavigator";
+import BottomTabNavigator from "../../navigation/bottomTabNavigator";
 
 
 import styles from "./styles";
@@ -33,16 +33,21 @@ const LoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleLogin = () => {
+    try{
     setIsLoading(true)
     dispatch(onLogin(username,password))
+    }catch{
+      setIsLoading(false)
+    }
   }
-  if (isLoading) {
+   if (isLoading) {
+    setTimeout(() => {setIsLoading(false)}, 7000)
     return (
       <View style={{ flex: 1, justifyContent: "center" }}>
         <ActivityIndicator size="large" color= {colors.primary} />
       </View>
     );
-  }
+  } 
     return (
       <View style={styles.background}>
         <SafeAreaView style={styles.container}>
