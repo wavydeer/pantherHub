@@ -7,15 +7,41 @@ import RegisterScreen from "../screens/Register";
 import LoginScreen from "../../components/screens/Login/index";
 import LandingScreen from "../screens/Landing/index";
 import { useSelector } from "react-redux";
-import { authReducer } from "../../redux/reducers";
-import { ActivityIndicator, View } from "react-native";
 
+import { ActivityIndicator, View, Dimensions } from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { DrawerContent } from "./drawerStackNavigator";
+import colors from "../../assets/Colors";
+import { authReducer } from "../../redux/reducers";
+import DrawerStackNavigator from "./drawerStackNavigator";
+import ProfileScreen from "../screens/Profile";
+import SettingsScreen from "../screens/Settings";
+import { Drawer } from "react-native-paper";
 const Stack = createStackNavigator();
-const HomeStack = () => {
+const Draw = createDrawerNavigator();
+const windowWidth = Dimensions.get("window").width;
+
+const DrawerStack = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name={"Tab Navigator"} component={BottomTabNavigator} />
-    </Stack.Navigator>
+    <>
+      <Draw.Navigator
+        drawerContent={(props) => <DrawerContent {...props} />}
+        screenOptions={{
+          drawerType: "slide",
+          drawerStyle: {
+            width: windowWidth * 0.7,
+          },
+          activeTintColor: colors.brightGold,
+          drawerActiveTintColor: colors.primary,
+        }}
+      >
+        <Draw.Screen
+          name={"Tab Navigator"}
+          component={BottomTabNavigator}
+          options={{ headerShown: false }}
+        />
+      </Draw.Navigator>
+    </>
   );
 };
 const SplashStack = () => {
@@ -71,7 +97,7 @@ const RootNavigation = () => {
 
   return (
     <NavigationContainer>
-      {authCurrentUser == null ? <AuthStack /> : <HomeStack />}
+      {authCurrentUser == null ? <AuthStack /> : <DrawerStack />}
     </NavigationContainer>
   );
 };

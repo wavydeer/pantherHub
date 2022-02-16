@@ -4,8 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-
-import HomeTabNavigator from "../screens/Home/HomeNavigation/homeTabNavigator"
+import HomeTabNavigator from "../screens/Home/HomeNavigation/homeTabNavigator";
 import SearchScreen from "../screens/Search/index";
 import MessageTabNavigator from "../screens/Message/MessageNavigation/MessageTabNavigator";
 import ToolsScreen from "../screens/Tools/index";
@@ -19,52 +18,48 @@ export class BottomTabNavigator extends Component {
   }
 
   render() {
-    
     const Tab = createBottomTabNavigator();
     //const insets = useSafeAreaInsets; //doesnt work on ios
 
     return (
       <Tab.Navigator
-        // screenOptions={({ route }) => ({
-        //   showIcon :true,
-        //   headerTitleAlign: "left",
-        //   headerTitleStyle: { fontSize: 22 },
-        //   // tabBarLabel: () => {
-        //   //   return null;
-        //   // },
-        //   tabBarStyle: { height: 70 /*+insets.bottom*/ },
-        //   tabBarIcon: ({ focused }) => {
-        //     let iconName;
-            
+      // screenOptions={({ route }) => ({
+      //   showIcon :true,
+      //   headerTitleAlign: "left",
+      //   headerTitleStyle: { fontSize: 22 },
+      //   // tabBarLabel: () => {
+      //   //   return null;
+      //   // },
+      //   tabBarStyle: { height: 70 /*+insets.bottom*/ },
+      //   tabBarIcon: ({ focused }) => {
+      //     let iconName;
 
-        //     if (route.name === "Home") {
-        //       iconName = focused ? "home" : "home-outline";
-        //     } else if (route.name === "Tools") {
-        //       iconName = focused ? "aperture" : "aperture-outline";
-        //     } else if (route.name === "MessageTab") {
-        //       iconName = focused
-        //         ? "chatbox-ellipses"
-        //         : "chatbox-ellipses-outline";
-        //     } else if (route.name === "Search") {
-        //       iconName = focused ? "search" : "search-outline";
-        //     } else if (route.name === "Post") {
-        //       iconName = focused ? "add" : "add-outline";
-        //     }
+      //     if (route.name === "Home") {
+      //       iconName = focused ? "home" : "home-outline";
+      //     } else if (route.name === "Tools") {
+      //       iconName = focused ? "aperture" : "aperture-outline";
+      //     } else if (route.name === "MessageTab") {
+      //       iconName = focused
+      //         ? "chatbox-ellipses"
+      //         : "chatbox-ellipses-outline";
+      //     } else if (route.name === "Search") {
+      //       iconName = focused ? "search" : "search-outline";
+      //     } else if (route.name === "Post") {
+      //       iconName = focused ? "add" : "add-outline";
+      //     }
 
-        //     return (
-        //       <View>
-        //       <Ionicons name= {iconName} size={20} style={{backgroundColor : 'black'}} />
-        //       </View>
-        //     );
-        //   },
-        // })}
-        
+      //     return (
+      //       <View>
+      //       <Ionicons name= {iconName} size={20} style={{backgroundColor : 'black'}} />
+      //       </View>
+      //     );
+      //   },
+      // })}
       >
         <Tab.Screen
           name={"HomeTab"}
           component={HomeTabNavigator}
-          options={{headerShown: false,}}
-          
+          options={{ headerShown: false }}
         />
         <Tab.Screen
           name={"Search"}

@@ -4,7 +4,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { DrawerActions } from "@react-navigation/native";
 import HomeScreen from "..";
 import homeDrawerNavigator from "../HomeDrawerNavigation/homeDrawerNavigator";
+import { Avatar } from "react-native-paper";
+import DrawerStackNavigator from "../../../navigation/drawerStackNavigator";
 
+import ProfileScreen from "../../Profile";
+import SettingsScreen from "../../Settings";
 const Stack = createStackNavigator();
 
 const HomeTabNavigator = ({ navigation }) => {
@@ -12,7 +16,6 @@ const HomeTabNavigator = ({ navigation }) => {
     <Stack.Navigator>
       <Stack.Screen
         name={"Home"}
-        component={homeDrawerNavigator}
         options={{
           headerTitleAlign: "center",
           headerStyle: { height: 90 },
@@ -25,27 +28,37 @@ const HomeTabNavigator = ({ navigation }) => {
 
           headerLeft: () => (
             <Pressable
-              style={styles.profileCircle}
               onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-            />
+            >
+              <View style={styles.profileCircle}>
+                <Avatar.Image
+                  source={{
+                    //user Image will go here
+                    uri: "https://picsum.photos/200/300?random=1",
+                  }}
+                  size={50}
+                />
+              </View>
+            </Pressable>
           ),
         }}
-      />
-      <Stack.Screen
-        name={"HomeDrawer"}
-        component={homeDrawerNavigator}
-        options={{ headerShown: false }}
-      />
+      >
+        {() => (
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen
+              name="DrawerScreens"
+              component={DrawerStackNavigator}
+            />
+          </Stack.Navigator>
+        )}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 };
 
 const styles = StyleSheet.create({
   profileCircle: {
-    backgroundColor: "black",
-    width: 50,
-    height: 50,
-    borderRadius: 100 / 2,
     marginLeft: 10,
     marginRight: 10,
     alignItems: "center",
